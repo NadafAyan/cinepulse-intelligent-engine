@@ -4,3 +4,7 @@ from app.schemas.recommendation import RecommendationResponse
 from typing import List
 
 app = FastAPI(title="CinePulse ML Engine", version="1.0")
+
+@app.get("/")
+def health_check():
+    return {"status": "active", "model": "TF-IDF Content Filtering"}
