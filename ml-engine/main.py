@@ -21,3 +21,7 @@ def recommend(movie_title: str):
         raise HTTPException(status_code=404, detail="Movie not found or no recommendations available")
         
     return recommendations
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
