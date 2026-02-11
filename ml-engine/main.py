@@ -8,3 +8,16 @@ app = FastAPI(title="CinePulse ML Engine", version="1.0")
 @app.get("/")
 def health_check():
     return {"status": "active", "model": "TF-IDF Content Filtering"}
+
+
+@app.get("/recommend/{movie_title}", response_model=List[RecommendationResponse])
+def recommend(movie_title: str):
+    """
+    Returns a list of recommended movies based on the content of the provided movie title.
+    """
+    recommendations = get_content_recommendations(movie_title)
+    
+    if not recommendations:
+        raise HTTPException(status_code=404, detail="Movie not found or no recommendations available")
+        
+    return recommendations
